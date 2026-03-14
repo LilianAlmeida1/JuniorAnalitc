@@ -1,0 +1,8 @@
+{
+  "version": "4.0",
+  "datasetReference": {
+    "byPath": {
+      "path": "../Analise_De_Vendas_Por_Consultor.SemanticModel"
+    }
+  }
+}

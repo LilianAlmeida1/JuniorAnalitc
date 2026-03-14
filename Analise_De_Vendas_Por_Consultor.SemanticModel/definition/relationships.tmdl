@@ -1,0 +1,5 @@
+relationship 2063c8d8-0dbe-4eea-a601-841b2b4e0c80
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Consultores.Data
+	toColumn: LocalDateTable_7b0ca2ba-4f94-47bc-af86-d45ba4a83889.Date
+

@@ -1,0 +1,24 @@
+table Medidas
+	lineageTag: 75229144-05d7-4473-88dc-dbf792c2e97d
+
+	measure Total = SUM(Consultores[Valor])
+		lineageTag: 390d0c86-a586-437c-9d7b-29901a75dfcd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Produtos = count(Consultores[Item])
+		formatString: 0
+		lineageTag: fc5809b6-3c53-4206-8bd5-32daa960f7cc
+
+	partition Medidas = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Coluna 1" = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Coluna 1", type text}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado",{"Coluna 1"})
+				in
+				    #"Colunas Removidas"
+
+	annotation PBI_ResultType = Table
+

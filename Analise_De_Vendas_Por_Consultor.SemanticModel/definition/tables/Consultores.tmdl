@@ -1,0 +1,81 @@
+table Consultores
+	lineageTag: 8648c2fa-5ceb-47cb-9665-fe05201e5eb6
+
+	column Consultor
+		dataType: string
+		lineageTag: 99d35bb3-1c23-4ea5-aefa-6ab37fc0c642
+		summarizeBy: none
+		sourceColumn: Consultor
+
+		annotation SummarizationSetBy = Automatic
+
+	column Item
+		dataType: string
+		lineageTag: ddc0b2e7-29e2-45fa-963f-87d6e29adccf
+		summarizeBy: none
+		sourceColumn: Item
+
+		annotation SummarizationSetBy = Automatic
+
+	column Pagamento
+		dataType: string
+		lineageTag: 29ef8d21-8eec-4d70-bbd4-b296aa12b035
+		summarizeBy: none
+		sourceColumn: Pagamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2922e2cc-c7d8-4d53-abd5-a1f2abd9b6de
+		summarizeBy: none
+		sourceColumn: Data
+
+		variation Variation
+			isDefault
+			relationship: 2063c8d8-0dbe-4eea-a601-841b2b4e0c80
+			defaultHierarchy: LocalDateTable_7b0ca2ba-4f94-47bc-af86-d45ba4a83889.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Valor
+		dataType: double
+		lineageTag: 064e1c5b-6d50-463e-a2a7-2a9d362c5017
+		summarizeBy: sum
+		sourceColumn: Valor
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Consultores = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\Lilian\OneDrive\Documentos\Cursos\Power Bi\Vendas_.xlsx"), null, true),
+				    Consultores_Sheet = Fonte{[Item="Consultores",Kind="Sheet"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Consultores_Sheet,{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type any}, {"Column5", type any}, {"Column6", type any}, {"Column7", type any}, {"Column8", type any}, {"Column9", type any}}),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Tipo Alterado", [PromoteAllScalars=true]),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type any}, {"Column5", type any}, {"Column6", type any}, {"Column7", type any}, {"Column8", type any}, {"Column9", type any}}),
+				    #"Cabeçalhos Promovidos1" = Table.PromoteHeaders(#"Tipo Alterado1", [PromoteAllScalars=true]),
+				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos1",{{"Vendedor", type text}, {"Item", type text}, {"Pagamento", type text}, {"01/01/2022", type number}, {"01/02/2022", Int64.Type}, {"01/03/2022", Int64.Type}, {"01/04/2022", Int64.Type}, {"01/05/2022", Int64.Type}, {"01/06/2022", Int64.Type}}),
+				    #"Preenchido Abaixo" = Table.FillDown(#"Tipo Alterado2",{"Vendedor", "Item", "Pagamento"}),
+				    #"Dividir Coluna por Delimitador" = Table.SplitColumn(#"Preenchido Abaixo", "Vendedor", Splitter.SplitTextByDelimiter(" ", QuoteStyle.Csv), {"Vendedor.1", "Vendedor.2"}),
+				    #"Tipo Alterado3" = Table.TransformColumnTypes(#"Dividir Coluna por Delimitador",{{"Vendedor.1", type text}, {"Vendedor.2", type text}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado3",{"Vendedor.2"}),
+				    #"Colocar Cada Palavra Em Maiúscula" = Table.TransformColumns(#"Colunas Removidas",{{"Vendedor.1", Text.Proper, type text}}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Colocar Cada Palavra Em Maiúscula",{{"Vendedor.1", "Consultor"}}),
+				    #"Colunas Não Dinâmicas" = Table.UnpivotOtherColumns(#"Colunas Renomeadas", {"Consultor", "Item", "Pagamento"}, "Atributo", "Valor"),
+				    #"Colunas Renomeadas1" = Table.RenameColumns(#"Colunas Não Dinâmicas",{{"Atributo", "Data"}}),
+				    #"Tipo Alterado4" = Table.TransformColumnTypes(#"Colunas Renomeadas1",{{"Data", type date}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado4","Murilu","Murilo",Replacer.ReplaceText,{"Consultor"})
+				in
+				    #"Valor Substituído"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

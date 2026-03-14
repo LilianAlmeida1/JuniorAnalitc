@@ -1,0 +1,21 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Consultores","Medidas"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Consultores
+ref table DateTableTemplate_0c309d42-93d3-43ca-89c4-154f17f12262
+ref table LocalDateTable_7b0ca2ba-4f94-47bc-af86-d45ba4a83889
+ref table Medidas
+
+ref cultureInfo pt-BR
+
