@@ -1,0 +1,20 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Perdas Lojas - Assalto"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'Perdas Lojas - Assalto'
+ref table DateTableTemplate_c01d4532-9d8b-446b-b9cb-ba074c79959a
+ref table LocalDateTable_4eb71421-de3f-4fca-9ff9-cc475fccdefa
+
+ref cultureInfo pt-BR
+

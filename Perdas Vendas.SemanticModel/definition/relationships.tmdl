@@ -1,0 +1,5 @@
+relationship a64014e3-da25-4f6a-9c09-46dcf597c94d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Perdas Lojas - Assalto'.mês
+	toColumn: LocalDateTable_4eb71421-de3f-4fca-9ff9-cc475fccdefa.Date
+

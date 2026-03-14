@@ -1,0 +1,71 @@
+table 'Perdas Lojas - Assalto'
+	lineageTag: b5ea5410-3811-4650-81b5-e9243441e947
+
+	column Loja
+		dataType: int64
+		formatString: 0
+		lineageTag: 358ad411-c94c-4acf-b2bb-192963549f47
+		summarizeBy: none
+		sourceColumn: Loja
+
+		annotation SummarizationSetBy = User
+
+	column Abastecimento
+		dataType: string
+		lineageTag: 1932060e-ad8c-47b0-886d-43acb81ff609
+		summarizeBy: none
+		sourceColumn: Abastecimento
+
+		annotation SummarizationSetBy = Automatic
+
+	column mês
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 57e15500-0806-4a65-a8d7-9b9bcee912de
+		summarizeBy: none
+		sourceColumn: mês
+
+		variation Variation
+			isDefault
+			relationship: a64014e3-da25-4f6a-9c09-46dcf597c94d
+			defaultHierarchy: LocalDateTable_4eb71421-de3f-4fca-9ff9-cc475fccdefa.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Depto
+		dataType: string
+		lineageTag: 8836abc1-7e0f-4a1a-b59b-746d547700b4
+		summarizeBy: none
+		sourceColumn: Depto
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Valor Perda'
+		dataType: int64
+		formatString: 0
+		lineageTag: e26b2cab-cf50-4ab4-b810-f66836c0b09a
+		summarizeBy: sum
+		sourceColumn: Valor Perda
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Perdas Lojas - Assalto' = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\Lilian\OneDrive\Documentos\Cursos\Power Bi\Perdas Assalto.xlsx"), null, true),
+				    #"Perdas Lojas - Assalto_Sheet" = Fonte{[Item="Perdas Lojas - Assalto",Kind="Sheet"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Perdas Lojas - Assalto_Sheet",{{"Column1", type any}, {"Column2", type text}, {"Column3", type any}, {"Column4", type text}, {"Column5", type any}, {"Column6", type any}, {"Column7", type any}}),
+				    #"Linhas Superiores Removidas" = Table.Skip(#"Tipo Alterado",1),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Linhas Superiores Removidas", [PromoteAllScalars=true]),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Loja", Int64.Type}, {"Abastecimento", type text}, {"mês", type date}, {"Depto", type text}, {"Valor Perda", Int64.Type}, {"Column6", type any}, {"Column7", type any}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado1",{"Column6", "Column7"})
+				in
+				    #"Colunas Removidas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
