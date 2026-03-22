@@ -68,11 +68,21 @@ GROUP BY C.[customer_state]
 ORDER BY TempoMedioParaEntrega DESC;
 
 
---Identificar quantos clientes (customer_unique_id) realizaram mais de uma compra e qual o intervalo médio de dias entre a primeira e a segunda compra.
+--Identificar quantos clientes (customer_unique_id) realizaram mais de uma compra e o valor do pedido.
 SELECT
-
-FROM
-
+    C.[customer_unique_id],
+    COUNT (DISTINCT O.[order_id]) AS QtdDePedidos,
+    SUM (I.[price]) AS ValorTotal
+FROM [dbo].[olist_orders_dataset] AS O
 JOIN
-
+[dbo].[olist_customers_dataset] AS C
 ON
+O.[customer_id] = C.[customer_id]
+JOIN
+[dbo].[olist_order_items_dataset] AS I
+ON
+I.[order_id] = O.[order_id]
+GROUP BY C.[customer_unique_id]
+HAVING  COUNT (DISTINCT O.[order_id]) >= 2
+ORDER BY ValorTotal DESC, QtdDePedidos DESC;
+
