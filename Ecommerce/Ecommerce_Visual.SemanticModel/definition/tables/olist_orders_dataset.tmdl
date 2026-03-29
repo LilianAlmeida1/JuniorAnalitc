@@ -1,0 +1,111 @@
+table olist_orders_dataset
+	lineageTag: 30740279-b257-4196-ad3e-6baf14b58257
+
+	column order_id
+		dataType: string
+		lineageTag: 6410870d-dec4-40ba-b19f-ac00bd3ecbef
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: string
+		lineageTag: a678acad-f75c-4be9-a208-f6697460c3fc
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_status
+		dataType: string
+		lineageTag: 9fd0959a-7fd5-446d-be75-9f6d12d93cba
+		summarizeBy: none
+		sourceColumn: order_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_purchase_timestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 625c57de-7dc7-4db3-8ab2-a4123d966563
+		summarizeBy: none
+		sourceColumn: order_purchase_timestamp
+
+		variation Variation
+			isDefault
+			relationship: edd2eb5d-246d-4b94-b595-17a9fc1940e0
+			defaultHierarchy: LocalDateTable_aaba454a-622d-4949-8743-1c5183da64bd.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_approved_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0e07f0df-1b9b-4755-aa8f-a24aedda38b6
+		summarizeBy: none
+		sourceColumn: order_approved_at
+
+		variation Variation
+			isDefault
+			relationship: 345f2311-6c16-4c82-b267-9a789c8a4f9c
+			defaultHierarchy: LocalDateTable_c6333c66-eef4-46f3-8d91-69982957b4b4.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_delivered_carrier_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4d295401-b717-43ef-8f0a-471c280a3120
+		summarizeBy: none
+		sourceColumn: order_delivered_carrier_date
+
+		variation Variation
+			isDefault
+			relationship: e6bd4310-b23d-4b7a-8511-08bcf0eb4147
+			defaultHierarchy: LocalDateTable_4bc1080b-bbea-4ede-a4c8-869e6262428c.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_delivered_customer_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e194f2b8-cd1a-496b-90ff-7ae71fe697ca
+		summarizeBy: none
+		sourceColumn: order_delivered_customer_date
+
+		variation Variation
+			isDefault
+			relationship: cfc5b348-f74c-49ae-9085-d8528d00fdab
+			defaultHierarchy: LocalDateTable_8d6e75e8-74d8-440f-a054-303f89c93e15.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_estimated_delivery_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: fd841ad6-5bb9-4107-8303-a3b9d3d87f16
+		summarizeBy: none
+		sourceColumn: order_estimated_delivery_date
+
+		variation Variation
+			isDefault
+			relationship: ce5777e7-2fb8-40d1-a03c-dd045ff0950f
+			defaultHierarchy: LocalDateTable_c54bfb7d-b554-4e3b-9ff0-8614253f146b.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition olist_orders_dataset = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Databases("DESKTOP-C1D8NLR\SQLEXPRESS"),
+				    ECOMMERCEBR = Fonte{[Name="ECOMMERCEBR"]}[Data],
+				    dbo_olist_orders_dataset = ECOMMERCEBR{[Schema="dbo",Item="olist_orders_dataset"]}[Data]
+				in
+				    dbo_olist_orders_dataset
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

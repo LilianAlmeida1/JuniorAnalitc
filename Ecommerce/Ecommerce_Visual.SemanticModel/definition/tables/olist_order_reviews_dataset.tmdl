@@ -1,0 +1,86 @@
+table olist_order_reviews_dataset
+	lineageTag: 77ac46ef-cf7c-4610-8af3-4d35df7c6da7
+
+	column review_id
+		dataType: string
+		lineageTag: 443ac6d6-6a81-45e3-a0f0-538be9cd39b5
+		summarizeBy: none
+		sourceColumn: review_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: string
+		lineageTag: 022b6060-e959-4634-a6d0-94a9d06cf26f
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_score
+		dataType: int64
+		formatString: 0
+		lineageTag: b95acebf-ba14-4383-a22c-c81bd750c354
+		summarizeBy: sum
+		sourceColumn: review_score
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_comment_title
+		dataType: string
+		lineageTag: 252b15ab-7879-4286-8e2c-dfe66c79b040
+		summarizeBy: none
+		sourceColumn: review_comment_title
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_comment_message
+		dataType: string
+		lineageTag: f4f70b68-cc1f-4adc-a55f-d0f414145ba5
+		summarizeBy: none
+		sourceColumn: review_comment_message
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_creation_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b1e898eb-6f62-4f75-bb44-1f7bf2890ab6
+		summarizeBy: none
+		sourceColumn: review_creation_date
+
+		variation Variation
+			isDefault
+			relationship: 93d230b5-2344-4947-ab07-6eb45df6af6f
+			defaultHierarchy: LocalDateTable_13b61568-b96f-4a3f-a57f-2392eb369d90.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_answer_timestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 39d54a46-a477-4fdf-8426-f1d201463d67
+		summarizeBy: none
+		sourceColumn: review_answer_timestamp
+
+		variation Variation
+			isDefault
+			relationship: a45386b7-604a-4843-90b7-ee1bb1a6815c
+			defaultHierarchy: LocalDateTable_f41426ff-621d-42a9-bf15-a7f7c2157c43.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition olist_order_reviews_dataset = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Databases("DESKTOP-C1D8NLR\SQLEXPRESS"),
+				    ECOMMERCEBR = Fonte{[Name="ECOMMERCEBR"]}[Data],
+				    dbo_olist_order_reviews_dataset = ECOMMERCEBR{[Schema="dbo",Item="olist_order_reviews_dataset"]}[Data]
+				in
+				    dbo_olist_order_reviews_dataset
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

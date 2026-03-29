@@ -1,0 +1,57 @@
+table Medidas
+	lineageTag: 95a239d4-3979-4c57-9a5a-3a1883acb23a
+
+	measure 'Total Vendas' = SUM(olist_order_items_dataset[price])
+		lineageTag: 28cf5234-cc80-4a98-bbe5-2259d369851e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Pedidos' = DISTINCTCOUNT(olist_orders_dataset[order_id])
+		formatString: 0
+		lineageTag: f3a4cbd7-68e0-4bb0-be3b-b70e79d37100
+
+	measure 'Ticket Medio' = DIVIDE([Total Vendas], [Total Pedidos], 0)
+		lineageTag: fa2b99a2-3b3a-4775-8b1e-d0d4076b7ebb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure QtdDeCategoria = DISTINCTCOUNT(product_category_name_translation[product_category_name])
+		formatString: 0
+		lineageTag: 7dac8050-5e5f-45f4-bd41-5470a2d976dd
+
+	measure 'Vendas Top Dinamico' = ```
+			
+			VAR Ranking = 
+			    RANKX(
+			        ALLSELECTED(olist_products_dataset[product_category_name]), 
+			        [Total Vendas], 
+			        , 
+			        DESC
+			    )
+			VAR SelecaoUsuario = [Valor Qtd Top N] 
+			
+			RETURN
+			IF(
+			    Ranking <= SelecaoUsuario, 
+			    [Total Vendas], 
+			    BLANK()
+			)
+			```
+		lineageTag: 279d634e-b01e-4fed-b401-d5c841e8f1a6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Medidas = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Coluna 1" = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Coluna 1", type text}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado",{"Coluna 1"})
+				in
+				    #"Colunas Removidas"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

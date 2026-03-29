@@ -1,0 +1,57 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "cc1c2836090ef9dd47bb",
+  "position": {
+    "x": 340.60085836909872,
+    "y": 398.83261802575106,
+    "z": 6,
+    "height": 299.94849785407723,
+    "width": 299.94849785407723,
+    "tabOrder": 6
+  },
+  "visual": {
+    "visualType": "map",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "olist_customers_dataset"
+                    }
+                  },
+                  "Property": "customer_zip_code_prefix"
+                }
+              },
+              "queryRef": "olist_customers_dataset.customer_zip_code_prefix",
+              "nativeQueryRef": "customer_zip_code_prefix",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "104d3eb14acb794470f1",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "olist_customers_dataset"
+              }
+            },
+            "Property": "customer_zip_code_prefix"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

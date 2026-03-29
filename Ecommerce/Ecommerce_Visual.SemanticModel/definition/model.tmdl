@@ -1,0 +1,36 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["olist_customers_dataset","olist_geolocation_dataset","olist_order_items_dataset","olist_order_payments_dataset","olist_order_reviews_dataset","olist_products_dataset","olist_orders_dataset","product_category_name_translation","Medidas"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table olist_customers_dataset
+ref table olist_geolocation_dataset
+ref table olist_order_items_dataset
+ref table DateTableTemplate_f69ef58a-806a-4b62-9fda-7c5e6e1db832
+ref table LocalDateTable_ec5c3fd8-3134-4665-a3bc-04e827c830c2
+ref table olist_order_payments_dataset
+ref table olist_order_reviews_dataset
+ref table LocalDateTable_13b61568-b96f-4a3f-a57f-2392eb369d90
+ref table LocalDateTable_f41426ff-621d-42a9-bf15-a7f7c2157c43
+ref table olist_products_dataset
+ref table olist_orders_dataset
+ref table LocalDateTable_aaba454a-622d-4949-8743-1c5183da64bd
+ref table LocalDateTable_c6333c66-eef4-46f3-8d91-69982957b4b4
+ref table LocalDateTable_4bc1080b-bbea-4ede-a4c8-869e6262428c
+ref table LocalDateTable_8d6e75e8-74d8-440f-a054-303f89c93e15
+ref table LocalDateTable_c54bfb7d-b554-4e3b-9ff0-8614253f146b
+ref table product_category_name_translation
+ref table Medidas
+ref table 'Qtd Top N'
+
+ref cultureInfo pt-BR
+

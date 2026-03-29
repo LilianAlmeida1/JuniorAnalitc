@@ -1,0 +1,61 @@
+table olist_order_payments_dataset
+	lineageTag: 5233c9a6-cc9e-463f-ac73-359f3645ebb7
+
+	column order_id
+		dataType: string
+		lineageTag: 055c8107-8264-451e-934c-ecce31257bd0
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_sequential
+		dataType: int64
+		formatString: 0
+		lineageTag: a2ab07f6-f15b-459e-ba1f-9d2d833cd586
+		summarizeBy: sum
+		sourceColumn: payment_sequential
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_type
+		dataType: string
+		lineageTag: c3effe98-0cb3-46ed-8d06-91b5fe0a90e6
+		summarizeBy: none
+		sourceColumn: payment_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_installments
+		dataType: int64
+		formatString: 0
+		lineageTag: d9543dba-7d07-45d3-816a-cbd41390f0a0
+		summarizeBy: sum
+		sourceColumn: payment_installments
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_value
+		dataType: double
+		lineageTag: 39b11fc4-e116-4e9a-98c2-89bfe7d40f0e
+		summarizeBy: sum
+		sourceColumn: payment_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition olist_order_payments_dataset = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Databases("DESKTOP-C1D8NLR\SQLEXPRESS"),
+				    ECOMMERCEBR = Fonte{[Name="ECOMMERCEBR"]}[Data],
+				    dbo_olist_order_payments_dataset = ECOMMERCEBR{[Schema="dbo",Item="olist_order_payments_dataset"]}[Data]
+				in
+				    dbo_olist_order_payments_dataset
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,63 @@
+table olist_geolocation_dataset
+	lineageTag: 3c1e24ca-a3b2-4e41-803b-82cd47b7aa86
+
+	column geolocation_zip_code_prefix
+		dataType: double
+		lineageTag: 4800b2e2-1da4-4cbb-843f-9769477ef690
+		summarizeBy: none
+		sourceColumn: geolocation_zip_code_prefix
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column geolocation_lat
+		dataType: double
+		lineageTag: dfa0d74e-363d-47be-b650-07ec094e9720
+		summarizeBy: sum
+		sourceColumn: geolocation_lat
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column geolocation_lng
+		dataType: double
+		lineageTag: 868b541f-5bf0-46a6-9ebb-90c0869adaaa
+		summarizeBy: sum
+		sourceColumn: geolocation_lng
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column geolocation_city
+		dataType: string
+		lineageTag: f6e34a40-4d36-4423-b551-d05f4f8940fd
+		summarizeBy: none
+		sourceColumn: geolocation_city
+
+		annotation SummarizationSetBy = Automatic
+
+	column geolocation_state
+		dataType: string
+		lineageTag: 6832ebb1-15da-4be4-956c-68289a524397
+		summarizeBy: none
+		sourceColumn: geolocation_state
+
+		annotation SummarizationSetBy = Automatic
+
+	partition olist_geolocation_dataset = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Databases("DESKTOP-C1D8NLR\SQLEXPRESS"),
+				    ECOMMERCEBR = Fonte{[Name="ECOMMERCEBR"]}[Data],
+				    dbo_olist_geolocation_dataset = ECOMMERCEBR{[Schema="dbo",Item="olist_geolocation_dataset"]}[Data]
+				in
+				    dbo_olist_geolocation_dataset
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

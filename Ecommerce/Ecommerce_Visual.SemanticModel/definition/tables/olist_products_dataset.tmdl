@@ -1,0 +1,103 @@
+table olist_products_dataset
+	lineageTag: 8afdb8eb-6f31-46d7-b2ae-578a213ce14f
+
+	column product_id
+		dataType: string
+		lineageTag: 956558ee-fef7-460d-b0b7-e22eca17bf1c
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_category_name
+		dataType: string
+		lineageTag: 45eb66d3-a499-495b-8b8d-3ea3f2fbf0f7
+		summarizeBy: none
+		sourceColumn: product_category_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_name_lenght
+		dataType: double
+		lineageTag: 181066b5-a683-498a-ad66-1b45e9e9aa97
+		summarizeBy: sum
+		sourceColumn: product_name_lenght
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column product_description_lenght
+		dataType: double
+		lineageTag: 9273ce55-6e87-40ab-8ec9-7a39e7485fca
+		summarizeBy: sum
+		sourceColumn: product_description_lenght
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column product_photos_qty
+		dataType: double
+		lineageTag: 1028049a-8c2a-490e-95f8-03e7c1354c7b
+		summarizeBy: sum
+		sourceColumn: product_photos_qty
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column product_weight_g
+		dataType: double
+		lineageTag: 532b81fe-35f4-4816-8f4a-94ac130f747a
+		summarizeBy: sum
+		sourceColumn: product_weight_g
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column product_length_cm
+		dataType: double
+		lineageTag: 21e31ff2-e50b-490f-a6e3-2c78ed283bff
+		summarizeBy: sum
+		sourceColumn: product_length_cm
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column product_height_cm
+		dataType: double
+		lineageTag: fdc81037-69c3-4386-8141-65c515ed1d0f
+		summarizeBy: sum
+		sourceColumn: product_height_cm
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column product_width_cm
+		dataType: double
+		lineageTag: 958ade86-3355-4b96-91c7-2563c40af383
+		summarizeBy: sum
+		sourceColumn: product_width_cm
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition olist_products_dataset = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Databases("DESKTOP-C1D8NLR\SQLEXPRESS"),
+				    ECOMMERCEBR = Fonte{[Name="ECOMMERCEBR"]}[Data],
+				    dbo_olist_products_dataset = ECOMMERCEBR{[Schema="dbo",Item="olist_products_dataset"]}[Data]
+				in
+				    dbo_olist_products_dataset
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

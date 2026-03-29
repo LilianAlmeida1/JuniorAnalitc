@@ -1,0 +1,58 @@
+table olist_customers_dataset
+	lineageTag: 402caf62-12c6-44ee-a0b4-b047fef50f9c
+
+	column customer_id
+		dataType: string
+		lineageTag: 067525ce-28d4-4756-8807-b9fae5947d49
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_unique_id
+		dataType: string
+		lineageTag: 76c52996-117d-4ae7-9064-3987ad43b575
+		summarizeBy: none
+		sourceColumn: customer_unique_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_zip_code_prefix
+		dataType: int64
+		formatString: 0
+		lineageTag: 5876353c-46c3-4435-9efa-c19582653cfd
+		summarizeBy: none
+		sourceColumn: customer_zip_code_prefix
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_city
+		dataType: string
+		lineageTag: a5af46f4-353d-4e65-9890-f290cc17e09c
+		summarizeBy: none
+		sourceColumn: customer_city
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_state
+		dataType: string
+		lineageTag: 5de64bcd-af7f-4437-a93a-36794ba166f9
+		summarizeBy: none
+		sourceColumn: customer_state
+
+		annotation SummarizationSetBy = Automatic
+
+	partition olist_customers_dataset = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Databases("DESKTOP-C1D8NLR\SQLEXPRESS"),
+				    ECOMMERCEBR = Fonte{[Name="ECOMMERCEBR"]}[Data],
+				    dbo_olist_customers_dataset = ECOMMERCEBR{[Schema="dbo",Item="olist_customers_dataset"]}[Data]
+				in
+				    dbo_olist_customers_dataset
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,26 @@
+table 'Qtd Top N'
+	lineageTag: 63066ec7-1820-4d75-86de-98baa5169207
+
+	measure 'Valor Qtd Top N' = SELECTEDVALUE('Qtd Top N'[Qtd Top N], 10)
+		formatString: 0
+		lineageTag: b6281cfb-7be4-4a52-b3dc-bfd05cb4b08b
+
+	column 'Qtd Top N'
+		formatString: 0
+		lineageTag: b479cf37-d0e4-4d4e-9022-7f4110709b34
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition 'Qtd Top N' = calculated
+		mode: import
+		source = GENERATESERIES(5, 50, 5)
+
+	annotation PBI_Id = f7687b8aa1904db1bd100c5f4c7f1bd5
+

@@ -1,0 +1,33 @@
+table product_category_name_translation
+	lineageTag: 7470d4db-732e-42d8-a301-fdfdfe86165e
+
+	column product_category_name
+		dataType: string
+		lineageTag: 6371ec5d-953a-4a36-bc78-cce02d913317
+		summarizeBy: none
+		sourceColumn: product_category_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_category_name_english
+		dataType: string
+		lineageTag: d581e540-0382-47da-bf7a-c7e7eef6dbdc
+		summarizeBy: none
+		sourceColumn: product_category_name_english
+
+		annotation SummarizationSetBy = Automatic
+
+	partition product_category_name_translation = m
+		mode: import
+		source =
+				let
+				    Fonte = Sql.Databases("DESKTOP-C1D8NLR\SQLEXPRESS"),
+				    ECOMMERCEBR = Fonte{[Name="ECOMMERCEBR"]}[Data],
+				    dbo_product_category_name_translation = ECOMMERCEBR{[Schema="dbo",Item="product_category_name_translation"]}[Data]
+				in
+				    dbo_product_category_name_translation
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
