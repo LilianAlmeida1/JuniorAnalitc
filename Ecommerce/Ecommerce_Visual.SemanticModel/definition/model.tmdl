@@ -25,12 +25,13 @@ ref table olist_products_dataset
 ref table olist_orders_dataset
 ref table LocalDateTable_aaba454a-622d-4949-8743-1c5183da64bd
 ref table LocalDateTable_c6333c66-eef4-46f3-8d91-69982957b4b4
-ref table LocalDateTable_4bc1080b-bbea-4ede-a4c8-869e6262428c
 ref table LocalDateTable_8d6e75e8-74d8-440f-a054-303f89c93e15
 ref table LocalDateTable_c54bfb7d-b554-4e3b-9ff0-8614253f146b
 ref table product_category_name_translation
 ref table Medidas
 ref table 'Qtd Top N'
+ref table dCalendario
+ref table LocalDateTable_fc84231e-be91-4a9d-af30-271ef9f9686a
 
 ref cultureInfo pt-BR
 

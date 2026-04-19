@@ -29,16 +29,35 @@ table olist_customers_dataset
 	column customer_city
 		dataType: string
 		lineageTag: a5af46f4-353d-4e65-9890-f290cc17e09c
+		dataCategory: City
 		summarizeBy: none
 		sourceColumn: customer_city
+		sortByColumn: country
+
+		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
 
 	column customer_state
 		dataType: string
 		lineageTag: 5de64bcd-af7f-4437-a93a-36794ba166f9
+		dataCategory: StateOrProvince
 		summarizeBy: none
 		sourceColumn: customer_state
+		sortByColumn: country
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		lineageTag: 523a2bed-890d-4010-bad3-ae14b002082c
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: country
+
+		changedProperty = SortByColumn
 
 		annotation SummarizationSetBy = Automatic
 
@@ -48,9 +67,11 @@ table olist_customers_dataset
 				let
 				    Fonte = Sql.Databases("DESKTOP-C1D8NLR\SQLEXPRESS"),
 				    ECOMMERCEBR = Fonte{[Name="ECOMMERCEBR"]}[Data],
-				    dbo_olist_customers_dataset = ECOMMERCEBR{[Schema="dbo",Item="olist_customers_dataset"]}[Data]
+				    dbo_olist_customers_dataset = ECOMMERCEBR{[Schema="dbo",Item="olist_customers_dataset"]}[Data],
+				    #"Personalização Adicionada" = Table.AddColumn(dbo_olist_customers_dataset, "country", each "BR"),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Personalização Adicionada",{{"country", type text}})
 				in
-				    dbo_olist_customers_dataset
+				    #"Tipo Alterado"
 
 	annotation PBI_NavigationStepName = Navegação
 

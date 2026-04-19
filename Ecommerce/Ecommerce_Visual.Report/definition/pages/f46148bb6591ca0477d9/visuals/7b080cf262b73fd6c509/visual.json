@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "7b080cf262b73fd6c509",
   "position": {
-    "x": 754.81545064377679,
-    "y": 179.09012875536482,
+    "x": 298.60182370820672,
+    "y": 440.60790273556233,
     "z": 5,
-    "height": 237.32188841201716,
-    "width": 476.84120171673817,
+    "height": 237.32522796352583,
+    "width": 927.90273556231011,
     "tabOrder": 5
   },
   "visual": {
@@ -88,6 +88,54 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Pedidos por categoria'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "47D"
                 }
               }
             }

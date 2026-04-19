@@ -23,11 +23,6 @@ relationship 345f2311-6c16-4c82-b267-9a789c8a4f9c
 	fromColumn: olist_orders_dataset.order_approved_at
 	toColumn: LocalDateTable_c6333c66-eef4-46f3-8d91-69982957b4b4.Date
 
-relationship e6bd4310-b23d-4b7a-8511-08bcf0eb4147
-	joinOnDateBehavior: datePartOnly
-	fromColumn: olist_orders_dataset.order_delivered_carrier_date
-	toColumn: LocalDateTable_4bc1080b-bbea-4ede-a4c8-869e6262428c.Date
-
 relationship cfc5b348-f74c-49ae-9085-d8528d00fdab
 	joinOnDateBehavior: datePartOnly
 	fromColumn: olist_orders_dataset.order_delivered_customer_date
@@ -69,4 +64,13 @@ relationship b2e8db66-f8bc-9f45-25f2-f4cc179e9d38
 	toCardinality: many
 	fromColumn: olist_geolocation_dataset.geolocation_zip_code_prefix
 	toColumn: olist_customers_dataset.customer_zip_code_prefix
+
+relationship 79ea786b-6270-4b44-bdb7-d51b522bdeef
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dCalendario.Date
+	toColumn: LocalDateTable_fc84231e-be91-4a9d-af30-271ef9f9686a.Date
+
+relationship 61dd1bcc-19f4-f9d3-5c08-2eec2a67946e
+	fromColumn: olist_orders_dataset.order_delivered_carrier_date
+	toColumn: dCalendario.Date
 

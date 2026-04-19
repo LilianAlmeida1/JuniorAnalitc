@@ -60,11 +60,6 @@ table olist_orders_dataset
 		summarizeBy: none
 		sourceColumn: order_delivered_carrier_date
 
-		variation Variation
-			isDefault
-			relationship: e6bd4310-b23d-4b7a-8511-08bcf0eb4147
-			defaultHierarchy: LocalDateTable_4bc1080b-bbea-4ede-a4c8-869e6262428c.'Hierarquia de datas'
-
 		annotation SummarizationSetBy = Automatic
 
 	column order_delivered_customer_date

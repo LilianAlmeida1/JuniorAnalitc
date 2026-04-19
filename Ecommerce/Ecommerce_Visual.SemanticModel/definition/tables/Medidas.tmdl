@@ -41,6 +41,10 @@ table Medidas
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	measure Calendario = CALENDARAUTO()
+		formatString: General Date
+		lineageTag: d6f8d416-130b-4b63-a00b-fc6b149c0af2
+
 	partition Medidas = m
 		mode: import
 		source =

@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "cc1c2836090ef9dd47bb",
   "position": {
-    "x": 340.60085836909872,
-    "y": 398.83261802575106,
+    "x": 791.73252279635267,
+    "y": 178.96656534954408,
     "z": 6,
-    "height": 299.94849785407723,
-    "width": 299.94849785407723,
+    "height": 244.13373860182372,
+    "width": 434.77203647416417,
     "tabOrder": 6
   },
   "visual": {
@@ -23,23 +23,136 @@
                       "Entity": "olist_customers_dataset"
                     }
                   },
-                  "Property": "customer_zip_code_prefix"
+                  "Property": "customer_state"
                 }
               },
-              "queryRef": "olist_customers_dataset.customer_zip_code_prefix",
-              "nativeQueryRef": "customer_zip_code_prefix",
+              "queryRef": "olist_customers_dataset.customer_state",
+              "nativeQueryRef": "customer_state",
               "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "olist_customers_dataset"
+                    }
+                  },
+                  "Property": "country"
+                }
+              },
+              "queryRef": "olist_customers_dataset.country",
+              "nativeQueryRef": "country",
+              "active": false
+            }
+          ]
+        },
+        "Size": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "olist_customers_dataset"
+                        }
+                      },
+                      "Property": "customer_unique_id"
+                    }
+                  },
+                  "Function": 5
+                }
+              },
+              "queryRef": "CountNonNull(olist_customers_dataset.customer_unique_id)",
+              "nativeQueryRef": "Contagem de customer_unique_id"
             }
           ]
         }
       }
+    },
+    "objects": {
+      "bubbles": [
+        {
+          "properties": {
+            "markerRangeType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'magnitude'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "mapStyles": [
+        {
+          "properties": {
+            "mapTheme": {
+              "expr": {
+                "Literal": {
+                  "Value": "'grayscale'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "43D"
+                }
+              }
+            }
+          }
+        }
+      ]
     },
     "drillFilterOtherVisuals": true
   },
   "filterConfig": {
     "filters": [
       {
-        "name": "104d3eb14acb794470f1",
+        "name": "dc577df4f800b5a6fc8e",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "olist_customers_dataset"
+                  }
+                },
+                "Property": "customer_unique_id"
+              }
+            },
+            "Function": 5
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f4fcc82d9ea1342107b5",
         "field": {
           "Column": {
             "Expression": {
@@ -47,10 +160,24 @@
                 "Entity": "olist_customers_dataset"
               }
             },
-            "Property": "customer_zip_code_prefix"
+            "Property": "customer_state"
           }
         },
-        "type": "Advanced"
+        "type": "Categorical"
+      },
+      {
+        "name": "2e2dfcf93b9a21f73fac",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "olist_customers_dataset"
+              }
+            },
+            "Property": "country"
+          }
+        },
+        "type": "Categorical"
       }
     ]
   }

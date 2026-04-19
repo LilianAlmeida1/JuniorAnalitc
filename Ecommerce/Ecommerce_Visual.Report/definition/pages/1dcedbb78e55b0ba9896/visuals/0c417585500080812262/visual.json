@@ -1,0 +1,51 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "0c417585500080812262",
+  "position": {
+    "x": 827.24890829694323,
+    "y": 68.937409024745264,
+    "z": 0,
+    "height": 650.24745269286757,
+    "width": 331.64483260553129,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "GroupRef": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "product_category_name_translation"
+                    }
+                  },
+                  "Property": "product_category_name (grupos)",
+                  "GroupedColumns": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "product_category_name_translation"
+                          }
+                        },
+                        "Property": "product_category_name"
+                      }
+                    }
+                  ]
+                }
+              },
+              "queryRef": "product_category_name_translation.product_category_name (grupos)",
+              "nativeQueryRef": "product_category_name (grupos)",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

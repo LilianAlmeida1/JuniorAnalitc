@@ -1,0 +1,85 @@
+table dCalendario
+	lineageTag: b307fe7a-75b8-4013-9b14-7f8eb75ef5a4
+
+	column Date
+		formatString: Short Date
+		lineageTag: a1f13ce6-d597-4ac6-9d94-101d4af00ef3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: 79ea786b-6270-4b44-bdb7-d51b522bdeef
+			defaultHierarchy: LocalDateTable_fc84231e-be91-4a9d-af30-271ef9f9686a.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ano
+		formatString: 0
+		lineageTag: aff84833-e958-4bd1-835d-ca3ea040ce5f
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Ano]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mes Num'
+		formatString: 0
+		lineageTag: 1981a55a-464e-4832-8837-a144dc09037f
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Mes Num]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mes Nome'
+		lineageTag: 1a6c3bc6-cb07-4677-b58e-eb25f2cee827
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Mes Nome]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre
+		lineageTag: 08cfa1bd-e956-4cb1-987b-5d8d9c362f35
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Trimestre]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dia Semana'
+		lineageTag: acc7d689-3350-4c05-911f-fed29735c7e5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Dia Semana]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnoMes
+		lineageTag: e80f25e5-0c93-4af4-84d9-545a87f4d36c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [AnoMes]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCalendario = calculated
+		mode: import
+		source =
+				
+				VAR BaseCalendar = CALENDARAUTO() -- Ele olha todas as datas da sua base OLS Ecommerce
+				RETURN
+				ADDCOLUMNS (
+				    BaseCalendar,
+				    "Ano", YEAR([Date]),
+				    "Mes Num", MONTH([Date]),
+				    "Mes Nome", FORMAT([Date], "MMMM"),
+				    "Trimestre", "Tri " & QUARTER([Date]),
+				    "Dia Semana", FORMAT([Date], "dddd"),
+				    "AnoMes", FORMAT([Date], "YYYY/MM")
+				)
+
+	annotation PBI_Id = 68498e8f197c4becb05c769f425185e5
+

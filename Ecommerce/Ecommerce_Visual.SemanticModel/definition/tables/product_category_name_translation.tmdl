@@ -9,11 +9,79 @@ table product_category_name_translation
 
 		annotation SummarizationSetBy = Automatic
 
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"product_category_name_translation","TableItemName":"product_category_name (grupos)","ObjectType":4},"LinkType":"UsedInGroup"}]
+
 	column product_category_name_english
 		dataType: string
 		lineageTag: d581e540-0382-47da-bf7a-c7e7eef6dbdc
 		summarizeBy: none
 		sourceColumn: product_category_name_english
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'product_category_name (grupos)' =
+			SWITCH(
+				TRUE,
+				ISBLANK('product_category_name_translation'[product_category_name]),
+				"(Em branco)",
+				'product_category_name_translation'[product_category_name] IN {"alimentos",
+					"alimentos_bebidas",
+					"bebidas"},
+				"Alimentício",
+				'product_category_name_translation'[product_category_name] IN {"cama_mesa_banho",
+					"casa_conforto",
+					"casa_conforto_2"},
+				"Cama_Mesa_E_Banho",
+				'product_category_name_translation'[product_category_name] IN {"artes",
+					"artes_e_artesanato",
+					"flores"},
+				"Decoração",
+				'product_category_name_translation'[product_category_name] IN {"audio",
+					"tablets_impressao_imagem",
+					"telefonia",
+					"telefonia_fixa"},
+				"Eletronicos",
+				'product_category_name_translation'[product_category_name] IN {"livros_importados",
+					"livros_interesse_geral",
+					"livros_tecnicos"},
+				"Livraria",
+				'product_category_name_translation'[product_category_name] IN {"cds_dvds_musicais",
+					"dvds_blu_ray",
+					"musica"},
+				"Mídias",
+				'product_category_name_translation'[product_category_name] IN {"moveis_colchao_e_estofado",
+					"moveis_cozinha_area_de_servico_jantar_e_jardim",
+					"moveis_decoracao",
+					"moveis_escritorio",
+					"moveis_quarto",
+					"moveis_sala"},
+				"Moveis",
+				'product_category_name_translation'[product_category_name] IN {"artigos_de_festas",
+					"artigos_de_natal"},
+				"Sazonalidades",
+				'product_category_name_translation'[product_category_name]
+			)
+		lineageTag: f0c173ec-238d-4b28-99e8-8bdd7a74aeb8
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "product_category_name_translation"
+				          }
+				        },
+				        "Property": "product_category_name"
+				      }
+				    }
+				  ]
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"p","Entity":"product_category_name_translation"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"p"}},"Property":"product_category_name"}}],"GroupItems":[{"DisplayName":"(Em branco)","BlankDefaultPlaceholder":true},{"DisplayName":"Alimentício","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"p"}},"Property":"product_category_name"}}],"Values":[[{"Literal":{"Value":"'alimentos'"}}],[{"Literal":{"Value":"'alimentos_bebidas'"}}],[{"Literal":{"Value":"'bebidas'"}}]]}}},{"DisplayName":"Cama_Mesa_E_Banho","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"p"}},"Property":"product_category_name"}}],"Values":[[{"Literal":{"Value":"'cama_mesa_banho'"}}],[{"Literal":{"Value":"'casa_conforto'"}}],[{"Literal":{"Value":"'casa_conforto_2'"}}]]}}},{"DisplayName":"Decoração","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"p"}},"Property":"product_category_name"}}],"Values":[[{"Literal":{"Value":"'artes'"}}],[{"Literal":{"Value":"'artes_e_artesanato'"}}],[{"Literal":{"Value":"'flores'"}}]]}}},{"DisplayName":"Eletronicos","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"p"}},"Property":"product_category_name"}}],"Values":[[{"Literal":{"Value":"'audio'"}}],[{"Literal":{"Value":"'tablets_impressao_imagem'"}}],[{"Literal":{"Value":"'telefonia'"}}],[{"Literal":{"Value":"'telefonia_fixa'"}}]]}}},{"DisplayName":"Livraria","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"p"}},"Property":"product_category_name"}}],"Values":[[{"Literal":{"Value":"'livros_importados'"}}],[{"Literal":{"Value":"'livros_interesse_geral'"}}],[{"Literal":{"Value":"'livros_tecnicos'"}}]]}}},{"DisplayName":"Mídias","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"p"}},"Property":"product_category_name"}}],"Values":[[{"Literal":{"Value":"'cds_dvds_musicais'"}}],[{"Literal":{"Value":"'dvds_blu_ray'"}}],[{"Literal":{"Value":"'musica'"}}]]}}},{"DisplayName":"Moveis","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"p"}},"Property":"product_category_name"}}],"Values":[[{"Literal":{"Value":"'moveis_colchao_e_estofado'"}}],[{"Literal":{"Value":"'moveis_cozinha_area_de_servico_jantar_e_jardim'"}}],[{"Literal":{"Value":"'moveis_decoracao'"}}],[{"Literal":{"Value":"'moveis_escritorio'"}}],[{"Literal":{"Value":"'moveis_quarto'"}}],[{"Literal":{"Value":"'moveis_sala'"}}]]}}},{"DisplayName":"Sazonalidades","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"p"}},"Property":"product_category_name"}}],"Values":[[{"Literal":{"Value":"'artigos_de_festas'"}}],[{"Literal":{"Value":"'artigos_de_natal'"}}]]}}}]}
 
 		annotation SummarizationSetBy = Automatic
 
